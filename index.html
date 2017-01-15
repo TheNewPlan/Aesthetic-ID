@@ -24,6 +24,7 @@
 	var mostOccurringEmotionString;
 	var mostOccurringEmotionIndex;
 	var emotionCountMaxIndices = [];
+	var currentMax = 0	
 		
     	function Emotion() {
         	$.ajax({
@@ -44,66 +45,54 @@
 				for (var i = 0; i < faceCount; i++){
 					maxString.push(0);
 					max.push(0);
-        	
 					if (data[i]['scores']['anger'] > max[i]){
 						max[i] = data[i]['scores']['anger'];
 						maxString[i] = 'anger';
 					}
-					//alert(max[i]);
 					if (data[i]['scores']['contempt'] > max[i]){
 						max[i]= data[i]['scores']['contempt'];
 						maxString[i] = 'contempt';
 					}
-					//alert(max[i]);
 					if (data[i]['scores']['disgust'] > max[i]){
 						max[i] = data[i]['scores']['disgust'];
 						maxString[i] = 'disgust';
 					}
-					//alert(max[i]);
 					if (data[i]['scores']['fear'] > max[i]){
 						max[i] = data[i]['scores']['fear'];
 						maxString[i] = 'fear';
 					}
-					//alert(max[i]);
 					if (data[i]['scores']['happiness'] > max[i]){
 						max[i] = data[i]['scores']['happiness'];
 						maxString[i] = 'happiness';
 					}
-					//alert(max[i]);
 					if (data[i]['scores']['neutral'] > max[i]){
 						max[i] = data[i]['scores']['neutral'];
 						maxString[i] = 'neutral';
 					}
-					//alert(max[i]);
 					if (data[i]['scores']['sadness'] > max[i]){
 						max[i] = data[i]['scores']['sadness'];
 						maxString[i] = 'sadness';
-						
 					}
-					//alert(max[i]);
 					if (data[i]['scores']['surprise'] > max[i]){
 						max[i] = data[i]['scores']['surprise'];
 						maxString[i] = 'surprise';
 					}
-					//alert(max[i]);
+					
+					// assign the number of emotions detected in the picture to their
+					// corresponding indices in an array called emotions
 					for (var j = 0; j < emotions.length; j++){
 						if (maxString[i] == emotions[j]){
 							emotionCounts[j]++;
 						}
 					}
 				}
-			    alert('There are '+faceCount+' people in this picture');
+			    	alert('There are '+faceCount+' people in this picture');
 			    	
-			    alert('Emotion counts are '+emotionCounts);
+			    	alert('Emotion counts are '+emotionCounts);
 			    	
-			    	
-			    for (var i = 0; i < faceCount; i++){
+			    	for (var i = 0; i < faceCount; i++){
 					alert('Face number '+(i+1)+' is '+maxString[i]);
 				}
-				
-				
-				
-				var currentMax = 0
 				
 				for (var i = 0; i < emotions.length; i++){
 					if (emotionCounts[i] > currentMax){
@@ -116,13 +105,8 @@
 						emotionCountMaxIndices.push(i);
 					}
 				}
+			
 				alert('The emotionCountMaxIndices are '+emotionCountMaxIndices);
-				
-	
-				
-				//alert('The most occurring emotion is '+emotions[mostOccurringEmotionIndex]);
-				
-				
 				
 			})
         		.fail(function(error) {
