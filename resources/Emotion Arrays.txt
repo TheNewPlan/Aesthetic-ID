@@ -1,8 +1,0 @@
-var anger = ["lol chill out fam", "why does php have to exist", "indignation", "mad bro?"];
-var contempt = ["look a you all sensitive","I'm not jealous, I'm envious","I cant believe you've done this.","lol, I'm ripped come at me"];
-var disgust = ["who has the time to post this","DELETE THIS","uhh new phone who dis","this... this isn't real is it"];
-var fear = ["Marty, what are you doing?","They were saying something about snakes...","HE BLEW THE OTHER GUY AWAY","Like, ZOINKS!"];
-var happiness = ["everything is fine","it's all in your head","we are all flying in the sky","revolutionary text"];
-var neutral = ["i am calm","i am the sea","i am ambiguous","i am lost in my mind"];
-var sadness = ["where do i go next?","does recursion ever end?","will we live to see qubits?","what ARE birds?"];
-var surprise = ["this program actually compiles","an api I can read","i understand block computing","mitochondria is the powerhouse of the cell"];
