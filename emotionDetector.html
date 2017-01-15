@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>JSSample</title>
+	<link  rel="stylesheet" type="text/css" href="../styles/aesthetic-IDStyles.css" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 	
 	<script type="text/javascript">
@@ -12,69 +13,69 @@
 	
 	var max = 0;
 	var maxString;
-    $(function() {
-        $.ajax({
-            url: "https://api.projectoxford.ai/emotion/v1.0/recognize",
-            beforeSend: function(xhrObj){
-                // Request headers
-                xhrObj.setRequestHeader("Content-Type","application/json");
-                xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","4a14fd4b5fe14a69bc024c0139a44910");
-            },
-            type: "POST",
-            // Request body
-             data: '{"url": "http://ichef.bbci.co.uk/news/624/cpsprodpb/11E92/production/_91526337_ee5c94e3-4ed8-4923-8d17-0cb46343b319.jpg"}',
-        })
-        .done(function(data) {
-        	console.log(data);
+    	$(function() {
+        	$.ajax({
+            		url: "https://api.projectoxford.ai/emotion/v1.0/recognize",
+            		beforeSend: function(xhrObj){
+                		// Request headers
+                		xhrObj.setRequestHeader("Content-Type","application/json");
+                		xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","4a14fd4b5fe14a69bc024c0139a44910");
+            		},
+            		type: "POST",
+            		// Request body
+             		data: '{"url": "http://ichef.bbci.co.uk/news/624/cpsprodpb/11E92/production/_91526337_ee5c94e3-4ed8-4923-8d17-0cb46343b319.jpg"}',
+        		})
+        		.done(function(data) {
+        			console.log(data);
         	
-        	if (data[0]['scores']['anger'] > max){
-        		max = data[0]['scores']['anger'];
-        		maxString = 'anger';
-        	}
-        	alert(max);
-        	if (data[0]['scores']['contempt'] > max){
-        		max = data[0]['scores']['contempt'];
-        		maxString = 'contempt';
-        	}
-        	alert(max);
-        	if (data[0]['scores']['disgust'] > max){
-        		max = data[0]['scores']['disgust'];
-        		maxString = 'disgust';
-        	}
-        	alert(max);
-        	if (data[0]['scores']['fear'] > max){
-        		max = data[0]['scores']['fear'];
-        		maxString = 'fear';
-        	}
-        	alert(max);
-        	if (data[0]['scores']['happiness'] > max){
-        		max = data[0]['scores']['happiness'];
-        		maxString = 'happiness';
-        	}
-        	alert(max);
-        	if (data[0]['scores']['neutral'] > max){
-        		max = data[0]['scores']['neutral'];
-        		maxString = 'neutral';
-        	}
-        	alert(max);
-        	if (data[0]['scores']['sadness'] > max){
-        		max = data[0]['scores']['sadness'];
-        		maxString = 'sadness';
-        	}
-            alert(max);
-            if (data[0]['scores']['surprise'] > max){
-        		max = data[0]['scores']['surprise'];
-        		maxString = 'surprise';
-        	}
-            alert(max);
-            alert(maxString);
-        })
-        .fail(function(error) {
-        console.log(error.getAllResponseHeaders());
+        			if (data[0]['scores']['anger'] > max){
+        				max = data[0]['scores']['anger'];
+        				maxString = 'anger';
+        			}
+        			alert(max);
+        			if (data[0]['scores']['contempt'] > max){
+        				max = data[0]['scores']['contempt'];
+        				maxString = 'contempt';
+				}
+				alert(max);
+				if (data[0]['scores']['disgust'] > max){
+					max = data[0]['scores']['disgust'];
+					maxString = 'disgust';
+				}
+				alert(max);
+				if (data[0]['scores']['fear'] > max){
+					max = data[0]['scores']['fear'];
+					maxString = 'fear';
+				}
+				alert(max);
+				if (data[0]['scores']['happiness'] > max){
+					max = data[0]['scores']['happiness'];
+					maxString = 'happiness';
+				}
+				alert(max);
+				if (data[0]['scores']['neutral'] > max){
+					max = data[0]['scores']['neutral'];
+					maxString = 'neutral';
+				}
+				alert(max);
+				if (data[0]['scores']['sadness'] > max){
+					max = data[0]['scores']['sadness'];
+					maxString = 'sadness';
+				}
+			    alert(max);
+			    if (data[0]['scores']['surprise'] > max){
+					max = data[0]['scores']['surprise'];
+					maxString = 'surprise';
+				}
+			    alert(max);
+			    alert(maxString);
+			})
+        		.fail(function(error) {
+        		console.log(error.getAllResponseHeaders());
         
-            alert("fail");
-        });
-    });
+            		alert("fail");
+        	});
+    	});
 
 	//***********************************************//
 	//******************MADLIB STUFF*****************//
