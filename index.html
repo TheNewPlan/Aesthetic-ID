@@ -1,117 +1,23 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-  <meta charset="utf-8">
-<title>Aesthetic Search Test</title>
-<!-- This Links to the Startpage stylesheet -->
-<link rel="stylesheet" type="text/css" href="searchstyle.css">
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Aesthetic Search Test</title>
+	<!-- This Links to the Startpage stylesheet -->
+	<link rel="stylesheet" type="text/css" href="searchstyle.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 	
 	<script type="text/javascript">
-	function process()
-	{
-	var projectoxford = document.link.newlink.value;
+	function process(){
+		var projectoxford = document.link.newlink.value;
 	}
+		
 	//***********************************************//
 	//******************EMOTION API******************//
 	//***********************************************//
-	 
-	var max = 0;
-	var maxString = [];
-	var emotions = ['anger', 'contempt', 'disgust', 'fear', 'happiness', 'neutral', 'sadness', 'surprise'];
-	var emotionCount = [0, 0, 0, 0, 0, 0, 0, 0];
-	var faceCount;
-	var mostOccurringEmotionString;
-	var mostOccurringEmotionIndex;
-	var emotionCountMax = 0;
-		
-    	$(function() {
-        	$.ajax({
-            		url: "https://api.projectoxford.ai/emotion/v1.0/recognize",
-            		beforeSend: function(xhrObj){
-                		// Request headers
-                		xhrObj.setRequestHeader("Content-Type","application/json");
-                		xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","4a14fd4b5fe14a69bc024c0139a44910");
-            		},
-            		type: "POST",
-            		// Request body
-             		data: '{"url": projectoxford}',
-        		})
-        		.done(function(data) {
-        			console.log(data);
-				faceCount = data.length;
-				
-				for (var i = 0; i < faceCount; i++){
-					maxString.push(0);
-        	
-					if (data[0]['scores']['anger'] > max){
-						max = data[0]['scores']['anger'];
-						maxString[i] = 'anger';
-						emotionCount[0]++;
-					}
-					alert(max);
-					if (data[0]['scores']['contempt'] > max){
-						max = data[0]['scores']['contempt'];
-						maxString[i] = 'contempt';
-						emotionCount[1]++;
-					}
-					alert(max);
-					if (data[0]['scores']['disgust'] > max){
-						max = data[0]['scores']['disgust'];
-						maxString[i] = 'disgust';
-						emotionCount[2]++;
-					}
-					alert(max);
-					if (data[0]['scores']['fear'] > max){
-						max = data[0]['scores']['fear'];
-						maxString[i] = 'fear';
-						emotionCount[3]++;
-					}
-					alert(max);
-					if (data[0]['scores']['happiness'] > max){
-						max = data[0]['scores']['happiness'];
-						maxString[i] = 'happiness';
-						emotionCount[4]++;
-					}
-					alert(max);
-					if (data[0]['scores']['neutral'] > max){
-						max = data[0]['scores']['neutral'];
-						maxString[i] = 'neutral';
-						emotionCount[5]++;
-					}
-					alert(max);
-					if (data[0]['scores']['sadness'] > max){
-						max = data[0]['scores']['sadness'];
-						maxString[i] = 'sadness';
-						emotionCount[6]++;
-					}
-					alert(max);
-					if (data[0]['scores']['surprise'] > max){
-						max = data[0]['scores']['surprise'];
-						maxString[i] = 'surprise';
-						emotionCount[7]++;
-					}
-				}
-			    	alert(max);
-			    	//alert(maxString);
-				alert('There are '+faceCount+'faces in this picture.');
-			    	for (var i = 0; i < faceCount; i++){
-					alert('Face #'i+1' is 'maxString[i]);
-				}
-				for (var i = 0; i < 8; i++){
-					if (emotionCount[i] > emotionCountMax){
-						emotionCountMax = emotionCount[i];
-						mostOccurringEmotionIndex = i;
-					}
-				}
-				alert('The most occurring emotion is '+emotions[mostOccurringEmotionIndex]);
-
-			})
-        		.fail(function(error) {
-        		console.log(error.getAllResponseHeaders());
-        
-            		alert("fail");
-        	});
-    	});
+	
+	
+	
 	</script>
 </head>  
 
