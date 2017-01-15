@@ -38,9 +38,15 @@ In addition we really like the current a e s t h e t i c.
 
 # What is the future for Aesthetic-ID?
 Make the form box and button functional.
+
 Create a fix for the changing subscription access from Microsoft Services (it changes every 24hrs).
+
 Create a better display for output, a new .html page, rather than Javascript alerts.
+
 Improve the HTML/CSS code to reduce redundacy as well as make more stylish.
+
 Deploy the website on the web.
+
 Create an organized file hierachy.
-Add more a e s t h e t i c
+
+Add more a e s t h e t i c.
