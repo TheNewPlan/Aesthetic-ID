@@ -11,16 +11,17 @@
 	//******************EMOTION API******************//
 	//***********************************************//
 	
-	var max = 0;
+	var max = [];
 	var maxString = [];
 	var emotions = ['anger', 'contempt', 'disgust', 'fear', 'happiness', 'neutral', 'sadness', 'surprise'];
-	var emotionCount = [0, 0, 0, 0, 0, 0, 0, 0];
+	var emotionCounts = [0, 0, 0, 0, 0, 0, 0, 0];
 	var faceCount;
 	var mostOccurringEmotionString;
 	var mostOccurringEmotionIndex;
-	var emotionCountMax = 0;
+	var emotionCountMaxIndices = [];
+
 		
-    	$(function() {
+    	function Emotion() {
         	$.ajax({
             		url: "https://api.projectoxford.ai/emotion/v1.0/recognize",
             		beforeSend: function(xhrObj){
@@ -30,7 +31,7 @@
             		},
             		type: "POST",
             		// Request body
-             		data: '{"url": "http://ichef.bbci.co.uk/news/624/cpsprodpb/11E92/production/_91526337_ee5c94e3-4ed8-4923-8d17-0cb46343b319.jpg"}',
+             		data: '{"url": "http://img14.deviantart.net/5c96/i/2010/076/a/e/happy_vs_sad_faces_by_visazseptiana.jpg"}',
         		})
         		.done(function(data) {
         			console.log(data);
@@ -38,91 +39,97 @@
 				
 				for (var i = 0; i < faceCount; i++){
 					maxString.push(0);
+					max.push(0);
         	
-					if (data[0]['scores']['anger'] > max){
-						max = data[0]['scores']['anger'];
+					if (data[i]['scores']['anger'] > max[i]){
+						max[i] = data[i]['scores']['anger'];
 						maxString[i] = 'anger';
-						emotionCount[0]++;
 					}
-					alert(max);
-					if (data[0]['scores']['contempt'] > max){
-						max = data[0]['scores']['contempt'];
+					//alert(max[i]);
+					if (data[i]['scores']['contempt'] > max[i]){
+						max[i]= data[i]['scores']['contempt'];
 						maxString[i] = 'contempt';
-						emotionCount[1]++;
 					}
-					alert(max);
-					if (data[0]['scores']['disgust'] > max){
-						max = data[0]['scores']['disgust'];
+					//alert(max[i]);
+					if (data[i]['scores']['disgust'] > max[i]){
+						max[i] = data[i]['scores']['disgust'];
 						maxString[i] = 'disgust';
-						emotionCount[2]++;
 					}
-					alert(max);
-					if (data[0]['scores']['fear'] > max){
-						max = data[0]['scores']['fear'];
+					//alert(max[i]);
+					if (data[i]['scores']['fear'] > max[i]){
+						max[i] = data[i]['scores']['fear'];
 						maxString[i] = 'fear';
-						emotionCount[3]++;
 					}
-					alert(max);
-					if (data[0]['scores']['happiness'] > max){
-						max = data[0]['scores']['happiness'];
+					//alert(max[i]);
+					if (data[i]['scores']['happiness'] > max[i]){
+						max[i] = data[i]['scores']['happiness'];
 						maxString[i] = 'happiness';
-						emotionCount[4]++;
 					}
-					alert(max);
-					if (data[0]['scores']['neutral'] > max){
-						max = data[0]['scores']['neutral'];
+					//alert(max[i]);
+					if (data[i]['scores']['neutral'] > max[i]){
+						max[i] = data[i]['scores']['neutral'];
 						maxString[i] = 'neutral';
-						emotionCount[5]++;
 					}
-					alert(max);
-					if (data[0]['scores']['sadness'] > max){
-						max = data[0]['scores']['sadness'];
+					//alert(max[i]);
+					if (data[i]['scores']['sadness'] > max[i]){
+						max[i] = data[i]['scores']['sadness'];
 						maxString[i] = 'sadness';
-						emotionCount[6]++;
+						
 					}
-					alert(max);
-					if (data[0]['scores']['surprise'] > max){
-						max = data[0]['scores']['surprise'];
+					//alert(max[i]);
+					if (data[i]['scores']['surprise'] > max[i]){
+						max[i] = data[i]['scores']['surprise'];
 						maxString[i] = 'surprise';
-						emotionCount[7]++;
+					}
+					//alert(max[i]);
+					for (var j = 0; j < emotions.length; j++){
+						if (maxString[i] == emotions[j]){
+							emotionCounts[j]++;
+						}
 					}
 				}
-			    	alert(max);
-			    	//alert(maxString);
-				alert('There are '+faceCount+'faces in this picture.');
-			    	for (var i = 0; i < faceCount; i++){
-					alert('Face #'i+1' is 'maxString[i]);
+			    alert('There are '+faceCount+' people in this picture');
+			    	
+			    alert('Emotion counts are '+emotionCounts);
+			    	
+			    	
+			    for (var i = 0; i < faceCount; i++){
+					alert('Face number '+(i+1)+' is '+maxString[i]);
 				}
-				for (var i = 0; i < 8; i++){
-					if (emotionCount[i] > emotionCountMax){
-						emotionCountMax = emotionCount[i];
-						mostOccurringEmotionIndex = i;
-					}
-				}
-				alert('The most occurring emotion is '+emotions[mostOccurringEmotionIndex]);
+				
+				
+				
+				var currentMax = 0
+				
+				for (var i = 0; i < emotions.length; i++){
 
+					if (emotionCounts[i] > currentMax){
+						currentMax = emotionCounts[i];
+					}
+				}
+				
+				for (var i = 0; i < emotions.length; i++){
+					if (emotionCounts[i] == currentMax){
+						emotionCountMaxIndices.push(i);
+					}
+				}
+				alert('The emotionCountMaxIndices are '+emotionCountMaxIndices);
+				
+	
+				
+
+				//alert('The most occurring emotion is '+emotions[mostOccurringEmotionIndex]);
+				
+				
+				
 			})
         		.fail(function(error) {
         		console.log(error.getAllResponseHeaders());
         
             		alert("fail");
         	});
-    	});
+    	};
 		
-	
-
-	//***********************************************//
-	//******************MADLIB STUFF*****************//
-	//***********************************************//
-	
-	var angerLib = '';
-	var contemptLib = '';
-	var disgustLib = '';
-	var fearLib = '';
-	var happinessLib = '';
-	var neutralLib = '';
-	var sadnessLib = '';
-	var surpriseLib = '';
 	
 </script>
 	
