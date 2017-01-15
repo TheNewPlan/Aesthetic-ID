@@ -18,5 +18,8 @@ Working with the Microsoft API was a challenge to implement using Javascript, an
 # What Languages does Aesthetic-ID currently implement?
 HTML, CSS3, JavaScript, jQuery(API Request)
 
+# How do you operate Aesthetic-ID?
+As of the latest commit, this will only function locally, which will require your own Microsoft Ocp Key from Microsoft.  In addition, you will need to change the url within the data attribute to send the photo through the cognitive API to detect the emotion.
+
 # What is the future for Aesthetic-ID?
 To be determined.
