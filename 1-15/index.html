@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Aesthetic Search Test</title>
+	<!-- This Links to the Startpage stylesheet -->
+	<link rel="stylesheet" type="text/css" href="searchstyle.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+		
+	<script type="text/javascript">
+	//function process(){	}
+		
+	//***********************************************//
+	//******************EMOTION API******************//
+	//***********************************************//
+	//var eDump; // This will dump the info in the new window at the end
+	var max = [];
+	var maxString = [];
+	var emotions = ['anger', 'contempt', 'disgust', 'fear', 'happiness', 'neutral', 'sadness', 'surprise'];
+	var emotionCounts = [0, 0, 0, 0, 0, 0, 0, 0];
+	var faceCount;
+	var mostOccurringEmotionString;
+	var mostOccurringEmotionIndex;
+	var emotionCountMaxIndices = [];
+	var faceCountSum = 0;
+		
+    	$(function Emotion() {
+        	$.ajax({
+            		url: "https://api.projectoxford.ai/emotion/v1.0/recognize",
+            		beforeSend: function(xhrObj){
+                		// Request headers
+                		xhrObj.setRequestHeader("Content-Type","application/json");
+                		xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","c372a576441d4219a68a8c81f40fda36");
+            		},
+            		type: "POST",
+            		// Request body
+             		data: '{"url": "http://cua.mit.edu/ketterle_group/group_info/Group%20photos/group01-11.JPG"}',
+        		})
+        		.done(function(data) {
+        			console.log(data);
+				faceCount = data.length;
+				//var projectoxford = document.link.newlink.value;
+				
+				for (var i = 0; i < faceCount; i++){
+					maxString.push(0);
+					max.push(0);
+        	
+					if (data[i]['scores']['anger'] > max[i]){
+						max[i] = data[i]['scores']['anger'];
+						maxString[i] = 'anger';
+					}
+					//alert(max[i]);
+					if (data[i]['scores']['contempt'] > max[i]){
+						max[i]= data[i]['scores']['contempt'];
+						maxString[i] = 'contempt';
+					}
+					//alert(max[i]);
+					if (data[i]['scores']['disgust'] > max[i]){
+						max[i] = data[i]['scores']['disgust'];
+						maxString[i] = 'disgust';
+					}
+					//alert(max[i]);
+					if (data[i]['scores']['fear'] > max[i]){
+						max[i] = data[i]['scores']['fear'];
+						maxString[i] = 'fear';
+					}
+					//alert(max[i]);
+					if (data[i]['scores']['happiness'] > max[i]){
+						max[i] = data[i]['scores']['happiness'];
+						maxString[i] = 'happiness';
+					}
+					//alert(max[i]);
+					if (data[i]['scores']['neutral'] > max[i]){
+						max[i] = data[i]['scores']['neutral'];
+						maxString[i] = 'neutral';
+					}
+					//alert(max[i]);
+					if (data[i]['scores']['sadness'] > max[i]){
+						max[i] = data[i]['scores']['sadness'];
+						maxString[i] = 'sadness';
+						
+					}
+					//alert(max[i]);
+					if (data[i]['scores']['surprise'] > max[i]){
+						max[i] = data[i]['scores']['surprise'];
+						maxString[i] = 'surprise';
+					}
+					//alert(max[i]);
+					//emotion counter
+					for (var j = 0; j < emotions.length; j++){
+						if (maxString[i] == emotions[j]){
+							emotionCounts[j]++;
+						}
+					}
+				}
+			    //alert('There are '+faceCount+' people in this picture');
+			    	
+			    //alert('Emotion counts are '+emotionCounts);
+			    	
+			    	
+			    //for (var i = 0; i < faceCount; i++){
+					//alert('Face number '+(i+1)+' is '+maxString[i]);
+					//eDump.document.write('<p>Face '+(i+1)+'detected as '+maxString[i]+'</p>');
+				
+				
+				
+				for (var i = 0; i < emotions.length; i++){
+					if (emotionCounts[i] != 0){
+						faceCountSum += emotionCounts[i];
+					}
+				}
+				
+				var currentMax = 0
+				
+				for (var i = 0; i < emotions.length; i++){
+					if (emotionCounts[i] > currentMax){
+						currentMax = emotionCounts[i];
+					}
+				}
+				
+				for (var i = 0; i < emotions.length; i++){
+					if (emotionCounts[i] == currentMax){
+						emotionCountMaxIndices.push(i);
+					}
+				}
+				
+				if (faceCountSum == 1){
+					alert('There is 1 face in this picture. The emotion detected is '+emotions[emotionCountMaxIndices]+'.');
+				} else {
+					alert('There are '+faceCountSum+' faces in this picture. The emotions detected are: \n'+maxString);
+				}
+				//alert('The emotionCountMaxIndices are '+emotionCountMaxIndices);
+				
+	
+				
+				//alert('The most occurring emotion is '+emotions[mostOccurringEmotionIndex]);
+				
+				//myWindow = window.open("","","width=200","height=100");
+				//myWindow.document.write(projectoxford);
+				//myWindow.document.write(eDump);
+				//location.reload();
+			})
+        		.fail(function(error) {
+        		console.log(error.getAllResponseHeaders());
+        
+            		alert("fail");
+        	});
+		
+    	});
+	
+	</script>
+</head>  
+
+<body>
+	
+	<!--
+
+  <div id="main"> 
+    
+    <h1 id="welcome">Aesthetic Emotion</h1>
+    
+    <form class="field" id="searchform" name="link">
+        <input type="text" name="newlink" id="searchterm" placeholder="Enter an Image URL">
+        <button type="button" name="submit" onClick="Emotion()" id="search">Find Yourself</button>
+    </form>
+  </div>
+  
+  	-->
+  
+</body>
+</html>
